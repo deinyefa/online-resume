@@ -1,11 +1,12 @@
+
 //------------------------ Bio ------------------------------//
-var name = HTMLheaderName.replace("%data%", "Deinyefa Eporwei");
+var myName = HTMLheaderName.replace("%data%", "Deinyefa Eporwei");
 var role = HTMLheaderRole.replace("%data%", "Front-end Developer");
 var logo = HTMLbioPic.replace("%data%", "images/fry.jpg");
 var welcomeMessage = HTMLwelcomeMsg.replace("%data%", "Lorem ipsum dolor sit amet.");
 
 var bio = {
-    "name": name,
+    "name": myName,
     "role": role,
     "contacts": {
         "mobile": "613-261-2124",
