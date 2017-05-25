@@ -1,64 +1,57 @@
-
 //------------------------ Bio ------------------------------//
-var myName = HTMLheaderName.replace("%data%", "Deinyefa Eporwei");
-var role = HTMLheaderRole.replace("%data%", "Front-end Developer");
-var logo = HTMLbioPic.replace("%data%", "images/fry.jpg");
-var welcomeMessage = HTMLwelcomeMsg.replace("%data%", "Lorem ipsum dolor sit amet.");
-
 var bio = {
-    "name": myName,
-    "role": role,
-    "contacts": {
-        "mobile": "613-261-2124",
-        "email": "df.eporwer@gmail.com",
-        "github": "deinyefa",
-        "location": "Ottawa"
-    },
-    "welcomeMessage": welcomeMessage,
-    "skills": [
-        "HTML", " CSS", " C#", " Unity3D", " JS"
-    ],
-    "pictureURL": logo,
-    "display": displayContacts = function() {
-        var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-        $("#topContacts").append(formattedMobile);
+  "name": "Deinyefa Eporwei",
+  "role": "Front-end Developer",
+  "contacts": {
+      "mobile": "613-xxx-xxxx",
+      "email": "my.email@gmail.com",
+      "github": "deinyefa",
+      "location": "Ottawa"
+  },
+  "welcomeMessage": "Lorem ipsum dolor sit amet.",
+  "skills": ["HTML", " CSS", " C#", " Unity3D", " JS"],
+  "biopic": "images/fry.jpg",
+  "display": function() {
 
-        var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-        $("#topContacts").append(formattedEmail);
+    //- name and role
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    $("#header").prepend(formattedRole);
 
-        var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
-        $("#topContacts").append(formattedGithub);
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    $("#header").prepend(formattedName);
 
-        var formattedContactLocation = HTMLlocation.replace("%data%", bio.contacts.location);
-        $("#topContacts").append(formattedContactLocation);
-    }
-};
+    //- contact info
+    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+    $("#topContacts, #footerContacts").append(formattedMobile);
 
-//- biopic and welcome message
-$("#header").append(bio.pictureURL);
-$("#header").append(bio.welcomeMessage);
+    var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+    $("#topContacts, #footerContacts").append(formattedEmail);
 
-//- skills list
-if (bio.skills.length > 0) {
+    var formattedGithub = HTMLgithub.replace("%data%", bio.contacts.github);
+    $("#topContacts, #footerContacts").append(formattedGithub);
+
+    var formattedContactLocation = HTMLlocation.replace("%data%", bio.contacts.location);
+    $("#topContacts, #footerContacts").append(formattedContactLocation);
+
+    //- biopic and welcome message
+    var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+    $("#header").append(formattedBioPic);
+
+    var welcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+    $("#header").append(welcomeMessage);
+
     $("#header").append(HTMLskillsStart);
 
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[4]);
-    $("#skills").append(formattedSkill);
-}
+    //- skills list
+    for (var skillsIndex = 0; skillsIndex < bio.skills.length; skillsIndex++)
+    {
+      var formattedSkill = HTMLskills.replace("%data%", bio.skills[skillsIndex]);
+      $("#skills").append(formattedSkill);
+    }
+  }
+};
 
-//- name, role and contact info
-$("#header").prepend(bio.display());
-$("#header").prepend(bio.role);
-$("#header").prepend(bio.name);
-
+bio.display();
 
 // ---------------------- Education ----------------------------//
 var education = {
@@ -66,16 +59,16 @@ var education = {
         "name": "Carleton University",
         "location": "Ottawa, Ontario",
         "degree": "BS",
-        "major": ["Earth Sciences"],
+        "majors": ["Earth Sciences"],
         "dates": "2017"
     }],
     "onlineCourses": [{
-        "title": ["Front-end Developer"],
+        "title": "Front-end Developer",
         "school": "Udacity",
         "dates": "2016 - present",
         "url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
     }],
-    "display": displayEducation = function() {
+    "display": function() {
         for (var schoolIndex = 0; schoolIndex < education.schools.length; schoolIndex++) {
             $("#education").append(HTMLschoolStart);
 
@@ -90,8 +83,11 @@ var education = {
             var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[schoolIndex].location);
             $(".education-entry:last").append(formattedSchoolLocation);
 
-            var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[schoolIndex].major);
-            $(".education-entry:last").append(formattedSchoolMajor);
+            for (var majorIndex = 0; majorIndex < education.schools[schoolIndex].majors.length; majorIndex++)
+            {
+              var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[schoolIndex].majors[majorIndex]);
+              $(".education-entry:last").append(formattedSchoolMajor);
+            }
         }
 
         for (var courseIndex = 0; courseIndex < education.onlineCourses.length; courseIndex++) {
@@ -114,7 +110,7 @@ var education = {
     }
 };
 
-$("#education").append(education.display());
+education.display();
 
 
 // -------------------------- Work ----------------------------- //
@@ -129,12 +125,12 @@ var work = {
         {
             "title": "VR Developer",
             "employer": "independent",
-            "location": "Ottawa, Ontario",
+            "location": "Edmonton, Alberta",
             "dates": "in progress",
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         }
     ],
-    "display": displayWork = function() {
+    "display": function() {
         for (var jobIndex = 0; jobIndex < work.jobs.length; jobIndex++) {
             $("#workExperience").append(HTMLworkStart);
 
@@ -156,7 +152,7 @@ var work = {
     }
 };
 
-$("#workExperience").append(work.display());
+work.display();
 
 
 // ------------------------- Projects ------------------------- //
@@ -175,7 +171,7 @@ var projects = {
             "images": ["http://placehold.it/350x250", " http://placehold.it/350x250"]
         }
     ],
-    "display": displayProjects = function() {
+    "display": function() {
         for (var projectIndex = 0; projectIndex < projects.projects.length; projectIndex++) {
             $("#projects").append(HTMLprojectStart);
 
@@ -199,6 +195,6 @@ var projects = {
     }
 };
 
-$("#projects").append(projects.display());
+projects.display();
 
 $("#mapDiv").append(googleMap);
